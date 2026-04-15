@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import Item from "./Item.jsx";
 import Footer from "./Footer.jsx";
 import SortedList from "./SortedList.jsx";
-import { addTask, deleteTask, setSorted } from "./todoSlice";
+import { addTask, deleteTask, editTask, setSorted } from "./todoSlice";
 
 function App() {
   const [task, setTask] = useState("");
@@ -22,6 +22,10 @@ function App() {
 
   function handleDelete(index) {
     dispatch(deleteTask(index));
+  }
+
+  function handleEdit(index, newTask) {
+    dispatch(editTask({ index, newTask }));
   }
 
   function handleChange(e) {
@@ -60,6 +64,7 @@ function App() {
               item={item}
               index={index}
               handleDelete={handleDelete}
+              handleEdit={handleEdit}
             />
           ))}
         </ul>
