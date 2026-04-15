@@ -16,15 +16,26 @@ const todoSlice = createSlice({
         state.count += 1;
       }
     },
+
     deleteTask: (state, action) => {
       state.tasks.splice(action.payload, 1);
       state.count -= 1;
     },
+
+    editTask: (state, action) => {
+      const { index, newTask } = action.payload;
+      if (newTask.trim() && !state.tasks.includes(newTask)) {
+        state.tasks[index] = newTask;
+      }
+    },
+
     setSorted: (state, action) => {
       state.sorted = action.payload;
     },
   },
 });
 
-export const { addTask, deleteTask, setSorted } = todoSlice.actions;
+export const { addTask, deleteTask, editTask, setSorted } =
+  todoSlice.actions;
+
 export default todoSlice.reducer;
